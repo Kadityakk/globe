@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* Great Vibes (SIL OFL) sebagai pengganti gratis untuk font script Amoresa */
+    --font-sans: 'Great Vibes', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Twemoji Country Flags', 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Palet dari referensi desain: latar luar angkasa, nebula ungu, glow atmosfer, lampu kota */
+    --color-space-950: #05060f;
+    --color-space-900: #0b0d24;
+    --color-nebula: #2a1a5e;
+    --color-glow: #3b82f6;
+    --color-glow-soft: #60a5fa;
+    --color-city: #fbbf24;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+        color-scheme: dark;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+/* Latar hero: navy hampir hitam di tepi, semburat nebula ungu-indigo di tengah atas */
+.bg-hero-space {
+    background:
+        radial-gradient(ellipse 55% 45% at 60% 32%, rgb(42 26 94 / 0.55), transparent 70%),
+        radial-gradient(ellipse 70% 55% at 32% 62%, rgb(30 58 138 / 0.28), transparent 72%),
+        radial-gradient(ellipse 120% 90% at 50% 40%, var(--color-space-900), var(--color-space-950) 75%);
+}
+
+/* Bintang sangat samar agar teks putih tetap mudah dibaca (HER-10) */
+.bg-starfield {
+    background-image:
+        radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.35), transparent),
+        radial-gradient(1px 1px at 27% 64%, rgb(255 255 255 / 0.2), transparent),
+        radial-gradient(1px 1px at 41% 9%, rgb(255 255 255 / 0.3), transparent),
+        radial-gradient(1px 1px at 58% 41%, rgb(255 255 255 / 0.18), transparent),
+        radial-gradient(1px 1px at 69% 15%, rgb(255 255 255 / 0.3), transparent),
+        radial-gradient(1px 1px at 83% 33%, rgb(255 255 255 / 0.22), transparent),
+        radial-gradient(1px 1px at 92% 8%, rgb(255 255 255 / 0.3), transparent),
+        radial-gradient(1px 1px at 6% 47%, rgb(255 255 255 / 0.2), transparent),
+        radial-gradient(1.5px 1.5px at 76% 58%, rgb(191 219 254 / 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 19% 36%, rgb(191 219 254 / 0.25), transparent);
+}
+
+/* Globe statis saat WebGL tidak tersedia */
+.globe-fallback {
+    background: url('/textures/earth-day.webp') 30% 40% / 200% 100%;
+    box-shadow:
+        inset -9rem -2rem 7rem rgb(5 6 15 / 0.95),
+        inset 0.75rem 0.25rem 2rem rgb(96 165 250 / 0.35),
+        0 0 4rem rgb(59 130 246 / 0.35);
+}
+
+/* Great Vibes hanya punya satu ketebalan; cegah browser membuat bold palsu */
+body {
+    font-synthesis-weight: none;
+}
+
+/* Tooltip hover bawaan globe.gl */
+.float-tooltip-kap {
+    font-family: var(--font-sans);
+}
